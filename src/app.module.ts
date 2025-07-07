@@ -6,6 +6,9 @@ import { TasksController } from './tasks/tasks.controller';
 import { HttpModule } from '@nestjs/axios';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
+import { ProductController } from './products/product.controller';
+import { ProductService } from './products/product.service';
+import { Product } from './entities/product.entity';
 
 @Module({
   imports: [
@@ -20,9 +23,9 @@ import { Task } from './entities/task.entity';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true, // ¡Cuidado! Solo para desarrollo, en producción usar migraciones
     }),
-    TypeOrmModule.forFeature([Task]),
+    TypeOrmModule.forFeature([Task, Product]),
   ],
-  controllers: [AppController, TasksController],
-  providers: [AppService, TasksService],
+  controllers: [AppController, TasksController, ProductController],
+  providers: [AppService, TasksService, ProductService],
 })
 export class AppModule {}
